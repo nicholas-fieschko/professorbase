@@ -1,0 +1,2 @@
+A Rails app for viewing information on computer science professors at Yale, Harvard, and MIT. 
+Made to practicing web scraping using Python's scrapy framework and importing that data into a Rails database with custom rake tasks.
