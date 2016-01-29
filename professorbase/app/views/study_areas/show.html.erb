@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @study_area.name %>
+</h1>
+
+
+<p>
+  <strong>Professors listed with this interest:</strong>
+  <%  Interest.where(study_area_id: @study_area.id).each do |i| %>
+    <% interested_prof = Professor.find(i.professor_id) %>
+    <%= link_to interested_prof.name, professor_path(interested_prof) %>
+  <% end %>
+</p>
+
+
+<%= link_to 'Back', study_areas_path %>

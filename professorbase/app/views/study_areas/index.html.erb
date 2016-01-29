@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Interests Index</h1>
+<h3>
+  <%= link_to "Go to professors index", professors_path %>
+</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @study_areas.each do |study_area| %>
+      <tr>
+        <td><%= link_to study_area.name, study_area %></td>
+        <td>
+          <b>Professors listed with this interest: </b>
+            <%  Interest.where(study_area_id: study_area.id).each do |i| %>
+                <% interested_prof = Professor.find(i.professor_id) %>
+                <%= link_to interested_prof.name, professor_path(interested_prof) %>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Study area', new_study_area_path %>

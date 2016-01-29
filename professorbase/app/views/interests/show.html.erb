@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Professor:</strong>
+  <% prof = Professor.find(@interest.professor_id) %>
+  <%= link_to prof.name, professor_path(prof) %>
+</p>
+
+<p>
+  <strong>Study area:</strong>
+  <%= StudyArea.find(@interest.study_area_id).name %>
+</p>
+
+<%= link_to 'Back', interests_path %>

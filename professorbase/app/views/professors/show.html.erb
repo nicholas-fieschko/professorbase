@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @professor.name %>
+</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @professor.title %>
+</p>
+
+<p>
+  <strong>University:</strong>
+  <%= University.find(@professor.university_id).name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @professor.email %>
+</p>
+
+<% unless @professor.address.nil? %>
+  <p>
+    <strong>Address:</strong>
+    <%= @professor.address %>
+  </p>
+<% end %>
+
+<% unless @professor.phone.nil? %>
+  <p>
+    <strong>Phone:</strong>
+    <%= @professor.phone %>
+  </p>
+<% end %>
+
+<% unless @professor.website.nil? || @professor.website.blank? %>
+  <p>
+    <strong>Website:</strong>
+    <%= link_to @professor.website, @professor.website %>
+  </p>
+<% end %>
+
+<% unless @professor.profile_link.nil? %>
+  <p>
+    <strong>University Profile:</strong>
+    <%= link_to @professor.profile_link, @professor.profile_link %>
+  </p>
+<% end %>
+
+
+<p>
+  <strong>Interests:</strong>
+<% if @professor.interests.count.zero? %>
+  This professor does not have any officially listed interests.
+<% else %>
+  <% @professor.interests.all.map do |i| %>
+    <% study_area = StudyArea.find(i.study_area_id) %>
+    <%= link_to study_area.name, study_area_path(study_area) %> 
+  <% end %>
+</p>
+<% end %>
+
+
+<p>
+  <strong>Publications:</strong>
+<% if @professor.publications.count.zero? %>
+  This professor does not have any officially listed publications.
+<% else %>
+  <ul>
+  <% @professor.publications.each do |p| %>
+    <li>
+      <%= Publication.find(p.id).info.gsub('&quot;','"') %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+</p>
+
+
+<% unless @professor.bio.nil? || @professor.bio.blank? %>
+  <p>
+    <strong>Bio:</strong>
+    <%= @professor.bio %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', professors_path %>

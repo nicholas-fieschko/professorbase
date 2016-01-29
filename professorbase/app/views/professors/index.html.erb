@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Professors Index</h1>
+<h3>
+  <%= link_to "Go to interests index", study_areas_path %>
+</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Profile</th>
+      <th>Email</th>
+      <th>University Profile</th>
+      <th>University</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @professors = @professors.sort_by { |professor| professor.name } %>
+    <% @professors.each do |professor| %>
+      <tr>
+        <td><%= link_to professor.name, professor_path(professor) %></td>
+        <td><%= professor.email %></td>
+        <td><%= link_to professor.profile_link, professor.profile_link %></td>
+        <td><%= University.find(professor.university_id).name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Professor', new_professor_path %>

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Interests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Professor</th>
+      <th>Study area</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interests = @interests.sort_by { |interest| StudyArea.find(interest.study_area_id).name } %>
+    <% @interests.each do |interest| %>
+      <tr>
+
+        <% prof = Professor.find(interest.professor_id) %>
+        <td><%= link_to prof.name, professor_path(prof) %></td>
+        <td><%= StudyArea.find(interest.study_area_id).name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
